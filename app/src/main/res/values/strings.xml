@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">KotlinConsecutivePractices</string>
+
+    <string name="date_release">Дата выхода</string>
+    <string name="developer">Разработчик</string>
+    <string name="publisher">Издатель</string>
+    <string name="about">Об игре</string>
+    <string name="tags">Тэги</string>
+    <string name="platforms">Платформы</string>
+    <string name="playtime">Длительность прохождения</string>
+    <string name="games_list">Список игр</string>
+    <string name="retry">Retry</string>
 </resources>
