@@ -2,6 +2,7 @@ package com.example.kotlinconsecutivepractices
 
 import android.app.Application
 import com.example.kotlinconsecutivepractices.di.mainModule
+import com.example.kotlinconsecutivepractices.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,7 +15,7 @@ class App : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
-            modules(mainModule)
+            modules(mainModule, networkModule)
         }
     }
 }

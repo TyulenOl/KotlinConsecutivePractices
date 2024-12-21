@@ -9,4 +9,5 @@
     <string name="platforms">Платформы</string>
     <string name="playtime">Длительность прохождения</string>
     <string name="games_list">Список игр</string>
+    <string name="retry">Retry</string>
 </resources>

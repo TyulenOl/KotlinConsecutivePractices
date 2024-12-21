@@ -51,23 +51,18 @@ android {
 }
 
 dependencies {
-    // Navigation
     implementation(libs.androidx.navigation.compose)
-
     implementation(libs.kotlinx.serialization.json)
-
-    // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
     implementation(libs.koin.compose.viewmodel)
-
     implementation(libs.coil.compose)
-
     implementation(libs.androidx.material3)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

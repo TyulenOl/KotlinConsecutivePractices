@@ -30,6 +30,8 @@ class TestGamesRepositoryImpl : IGamesRepository {
             4.6F,
             listOf("Shooter", "Puzzle")
         ),
+
+
     )
 
     private val gamesDetails: List<GameDetailEntity> = listOf(
@@ -74,11 +76,11 @@ class TestGamesRepositoryImpl : IGamesRepository {
         )
     )
 
-    override fun getGames(): List<GameEntity> {
+    override suspend fun getGames(): List<GameEntity> {
         return games
     }
 
-    override fun getGameDetailsById(gameId: Int): GameDetailEntity {
+    override suspend fun getGameDetailsById(gameId: Int): GameDetailEntity {
         return gamesDetails.first { it.id == gameId }
     }
 }

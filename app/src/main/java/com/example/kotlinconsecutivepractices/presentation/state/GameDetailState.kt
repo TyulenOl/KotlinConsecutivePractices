@@ -4,4 +4,6 @@ import com.example.kotlinconsecutivepractices.presentation.model.GameDetailUiEnt
 
 interface GameDetailState {
     val gameDetail: GameDetailUiEntity?
+    val error: String?
+    val loading: Boolean
 }
