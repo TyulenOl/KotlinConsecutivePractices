@@ -12,4 +12,10 @@ data object GamesListRoute
 data object FiltersRoute
 
 @Serializable
+data object ProfileRoute
+
+@Serializable
+data object EditProfileRoute
+
+@Serializable
 data class GameDetailRoute(val gameId: Int)

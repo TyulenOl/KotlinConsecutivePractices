@@ -1,8 +1,11 @@
+import com.google.protobuf.gradle.id
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "1.9.22"
     id("com.google.devtools.ksp")
+    id("com.google.protobuf") version "0.9.4"
 }
 
 android {
@@ -49,6 +52,24 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    protobuf {
+        protoc {
+            artifact = "com.google.protobuf:protoc:3.24.1"
+        }
+        generateProtoTasks {
+            all().forEach { task ->
+                task.builtins {
+                    id("java") {
+                        option("lite")
+                    }
+                    id("kotlin") {
+                        option("lite")
+                    }
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -83,4 +104,8 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.datastore)
+    implementation(libs.protobuf.javalite)
+    implementation(libs.protobuf.kotlin.lite)
 }

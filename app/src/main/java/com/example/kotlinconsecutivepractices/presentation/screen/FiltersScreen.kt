@@ -30,8 +30,8 @@ fun FiltersScreen() {
     val viewModel = koinViewModel<GamesListViewModel>()
     val uiState = viewModel.uiState
 
-    var nameFilter by remember { mutableStateOf(uiState.nameFilter) }
-    var yearFilter by remember { mutableStateOf(uiState.yearFilter) }
+//    var nameFilter by remember { mutableStateOf(uiState.nameFilter) }
+//    var yearFilter by remember { mutableStateOf(uiState.yearFilter) }
 
     Column(
         modifier = Modifier
@@ -58,8 +58,8 @@ fun FiltersScreen() {
 
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = nameFilter,
-                    onValueChange = { nameFilter = it },
+                    value = uiState.nameFilter,
+                    onValueChange = { viewModel.setNameFilter(it) },
                     placeholder = { Text(stringResource(R.string.search_name_placeholder)) }
                 )
             }
@@ -76,15 +76,15 @@ fun FiltersScreen() {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number
                     ),
-                    value = yearFilter,
-                    onValueChange = { yearFilter = it },
+                    value = uiState.yearFilter,
+                    onValueChange = { viewModel.setYearFilter(it) },
                     placeholder = { Text(stringResource(R.string.year_release_placeholder)) }
                 )
             }
         }
 
         Button(
-            onClick = { viewModel.updateFilters(nameFilter, yearFilter) },
+            onClick = { viewModel.updateFilters(uiState.nameFilter, uiState.yearFilter) },
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.padding(horizontal = 10.dp)
         ) {

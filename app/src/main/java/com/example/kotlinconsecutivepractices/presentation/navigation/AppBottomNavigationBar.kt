@@ -24,7 +24,8 @@ fun AppBottomNavigationBar(
         listOf(
             BottomBarItems.GamesList,
             BottomBarItems.Filters,
-            BottomBarItems.Favorites
+            BottomBarItems.Favorites,
+            BottomBarItems.Profile
         )
     }
 

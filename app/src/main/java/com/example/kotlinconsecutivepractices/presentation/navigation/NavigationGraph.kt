@@ -4,10 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.kotlinconsecutivepractices.presentation.screen.EditProfileScreen
 import com.example.kotlinconsecutivepractices.presentation.screen.FavoritesScreen
 import com.example.kotlinconsecutivepractices.presentation.screen.FiltersScreen
 import com.example.kotlinconsecutivepractices.presentation.screen.GameDetailScreen
 import com.example.kotlinconsecutivepractices.presentation.screen.GamesListScreen
+import com.example.kotlinconsecutivepractices.presentation.screen.ProfileScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
@@ -32,6 +34,12 @@ fun NavigationGraph(navController: NavHostController) {
         }
         composable<GameDetailRoute> {
             GameDetailScreen()
+        }
+        composable<ProfileRoute> {
+            ProfileScreen(onEditNavigation = { navController.navigate(route = EditProfileRoute) })
+        }
+        composable<EditProfileRoute> {
+            EditProfileScreen(onBackNavigation = { navController.popBackStack() })
         }
     }
 }

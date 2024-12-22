@@ -84,18 +84,26 @@ class GamesListViewModel(
         }
     }
 
+    fun setNameFilter(name: String) {
+        _uiState.nameFilter = name
+    }
+
+    fun setYearFilter(year: String) {
+        _uiState.yearFilter = year
+    }
+
+    fun setFilters(name: String, year: String, isFiltersUsed: Boolean) {
+        _uiState.nameFilter = name
+        _uiState.yearFilter = year
+        _uiState.isFiltersUsed = isFiltersUsed
+    }
+
     private suspend fun saveFilters(name: String, year: String, isFiltersUsed: Boolean) {
         context.dataStore.edit { filters ->
             filters[NAME_KEY] = name
             filters[YEAR_KEY] = year
             filters[FILTERS_USED_KEY] = isFiltersUsed
         }
-    }
-
-    private fun setFilters(name: String, year: String, isFiltersUsed: Boolean) {
-        _uiState.nameFilter = name
-        _uiState.yearFilter = year
-        _uiState.isFiltersUsed = isFiltersUsed
     }
 
     private class MutableGamesListState : GamesListState {

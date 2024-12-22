@@ -12,6 +12,8 @@
     <string name="games_list">Список игр</string>
     <string name="filters">Фильтры</string>
     <string name="favorites_games">Избранные игры</string>
+    <string name="profile">Профиль</string>
+    <string name="edit_profile">Редактировать профиль</string>
 
     <string name="search_name">Поиск по названию</string>
     <string name="year_release">Год выпуска</string>
@@ -19,6 +21,13 @@
     <string name="search_name_placeholder">Введите название игры</string>
     <string name="year_release_placeholder">Введите год выпуска</string>
 
+    <string name="profile_name">Имя пользователя</string>
+    <string name="profile_url">Ссылка на резюме</string>
+    <string name="camera">Камера</string>
+    <string name="gallery">Галерея</string>
+
     <string name="apply">Применить</string>
     <string name="retry">Повторить</string>
+    <string name="save">Сохранить</string>
+    <string name="resume">Резюме</string>
 </resources>
