@@ -7,8 +7,8 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 fun CoroutineScope.launchLoadingAndError(
-    handleError: (Throwable) -> Unit,
-    updateLoading: (Boolean) -> Unit,
+    handleError: (Throwable) -> Unit = {},
+    updateLoading: (Boolean) -> Unit = {},
     block: suspend CoroutineScope.() -> Unit
 ): Job {
     val context =

@@ -5,9 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.kotlinconsecutivepractices.presentation.screen.FavoritesScreen
+import com.example.kotlinconsecutivepractices.presentation.screen.FiltersScreen
 import com.example.kotlinconsecutivepractices.presentation.screen.GameDetailScreen
 import com.example.kotlinconsecutivepractices.presentation.screen.GamesListScreen
-import com.example.kotlinconsecutivepractices.presentation.screen.SettingsScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
@@ -22,11 +22,13 @@ fun NavigationGraph(navController: NavHostController) {
                 }
             )
         }
-        composable<FavoritesRoute> {
-            FavoritesScreen()
+        composable<FiltersRoute> {
+            FiltersScreen()
         }
-        composable<SettingsRoute> {
-            SettingsScreen()
+        composable<FavoritesRoute> {
+            FavoritesScreen(onGameClick = { id ->
+                navController.navigate(route = GameDetailRoute(id))
+            },)
         }
         composable<GameDetailRoute> {
             GameDetailScreen()

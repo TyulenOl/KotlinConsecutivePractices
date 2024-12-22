@@ -6,5 +6,6 @@ data class GameUiEntity (
     val released: String,
     val backgroundImage: String,
     val rating: String,
-    val genres: List<String>
+    val genres: List<String>,
+    val isFavorite: Boolean
 )

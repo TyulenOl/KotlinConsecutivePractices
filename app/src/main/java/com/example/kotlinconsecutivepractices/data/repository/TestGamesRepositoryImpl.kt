@@ -13,14 +13,16 @@ class TestGamesRepositoryImpl : IGamesRepository {
             "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
             4.47F,
             listOf("Singleplayer", "Steam Achievements", "Multiplayer", "Full controller support", "Atmospheric", "Great Soundtrack", "RPG", "Co-op", "Open World", "cooperative", "First-Person", "Third Person", "Funny", "Sandbox", "Comedy", "Crime"),
-        ),
+            false
+            ),
         GameEntity(
             3328,
             "The Witcher 3: Wild Hunt",
             "2015-05-18",
             "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
             4.65F,
-            listOf("Action", "RPG")
+            listOf("Action", "RPG"),
+            false
         ),
         GameEntity(
             4200,
@@ -28,7 +30,8 @@ class TestGamesRepositoryImpl : IGamesRepository {
             "2011-04-18",
             "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
             4.6F,
-            listOf("Shooter", "Puzzle")
+            listOf("Shooter", "Puzzle"),
+            false
         ),
 
 
@@ -76,11 +79,27 @@ class TestGamesRepositoryImpl : IGamesRepository {
         )
     )
 
-    override suspend fun getGames(): List<GameEntity> {
+    override suspend fun getGames(search: String?, year: String?): List<GameEntity> {
         return games
     }
 
     override suspend fun getGameDetailsById(gameId: Int): GameDetailEntity {
         return gamesDetails.first { it.id == gameId }
+    }
+
+    override suspend fun saveGame(gameEntity: GameEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun removeGame(gameEntity: GameEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun findSavedGameById(gameId: Int): GameEntity? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getSavedGames(): List<GameEntity> {
+        TODO("Not yet implemented")
     }
 }

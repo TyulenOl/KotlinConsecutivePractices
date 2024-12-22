@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "1.9.22"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -51,12 +52,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.retrofit)
-    implementation(libs.gson)
-    implementation(libs.converter.gson)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
@@ -77,4 +72,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 }

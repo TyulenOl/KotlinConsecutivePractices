@@ -8,6 +8,17 @@
     <string name="tags">Тэги</string>
     <string name="platforms">Платформы</string>
     <string name="playtime">Длительность прохождения</string>
+
     <string name="games_list">Список игр</string>
-    <string name="retry">Retry</string>
+    <string name="filters">Фильтры</string>
+    <string name="favorites_games">Избранные игры</string>
+
+    <string name="search_name">Поиск по названию</string>
+    <string name="year_release">Год выпуска</string>
+
+    <string name="search_name_placeholder">Введите название игры</string>
+    <string name="year_release_placeholder">Введите год выпуска</string>
+
+    <string name="apply">Применить</string>
+    <string name="retry">Повторить</string>
 </resources>

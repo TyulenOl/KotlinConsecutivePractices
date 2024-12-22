@@ -9,7 +9,7 @@ data object FavoritesRoute
 data object GamesListRoute
 
 @Serializable
-data object SettingsRoute
+data object FiltersRoute
 
 @Serializable
 data class GameDetailRoute(val gameId: Int)

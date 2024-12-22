@@ -13,7 +13,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinconsecutivepractices.presentation.navigation.AppBottomNavigationBar
 import com.example.kotlinconsecutivepractices.presentation.navigation.NavigationGraph
+import com.example.kotlinconsecutivepractices.presentation.utils.FiltersPinCache
 import com.example.kotlinconsecutivepractices.ui.theme.KotlinConsecutivePracticesTheme
+import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +33,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DefaultAppScreen(navController: NavHostController) {
+    val filtersPinCache = koinInject<FiltersPinCache>()
+
     Scaffold(
         bottomBar = {
             AppBottomNavigationBar(
-                navController = navController
+                navController = navController,
+                filtersPinCache = filtersPinCache
             )
         }
     )

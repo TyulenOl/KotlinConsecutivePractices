@@ -14,7 +14,8 @@ class GamesDataMapper {
                 it.released.orEmpty(),
                 it.backgroundImage.orEmpty(),
                 it.rating ?: 0F,
-                it.genres?.map { genre -> genre.name.orEmpty() } ?: emptyList()
+                it.genres?.map { genre -> genre.name.orEmpty() } ?: emptyList(),
+                false
             )
         }.orEmpty()
     }

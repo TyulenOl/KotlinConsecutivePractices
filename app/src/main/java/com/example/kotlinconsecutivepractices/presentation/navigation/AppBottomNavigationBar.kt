@@ -1,32 +1,30 @@
 package com.example.kotlinconsecutivepractices.presentation.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import com.example.kotlinconsecutivepractices.presentation.utils.FiltersPinCache
 
 @Composable
 fun AppBottomNavigationBar(
-    navController: NavController
+    navController: NavController,
+    filtersPinCache: FiltersPinCache
 ) {
     val bottomRoutes = remember {
         listOf(
             BottomBarItems.GamesList,
-            BottomBarItems.Favorites,
-            BottomBarItems.Settings
+            BottomBarItems.Filters,
+            BottomBarItems.Favorites
         )
     }
 
@@ -40,10 +38,19 @@ fun AppBottomNavigationBar(
             NavigationBarItem(
                 selected = isSelected,
                 icon = {
-                    Icon(
-                        bottomBarItem.icon,
-                        bottomBarItem.name
-                    )
+                    BadgedBox(
+                        badge = {
+                            if (filtersPinCache.isFiltersUsed() && bottomBarItem.route == FiltersRoute)
+                            {
+                                Badge()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            bottomBarItem.icon,
+                            bottomBarItem.name
+                        )
+                    }
                 },
                 alwaysShowLabel = false,
                 label = {
@@ -55,19 +62,4 @@ fun AppBottomNavigationBar(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun AppBottomNavigationBarPreview() {
-    Scaffold(
-        bottomBar = {
-            AppBottomNavigationBar(
-                navController = rememberNavController()
-            )
-        }
-    ) { paddingValues ->
-        Box(Modifier.padding(paddingValues))
-    }
-
 }

@@ -6,14 +6,27 @@ import com.example.kotlinconsecutivepractices.presentation.model.GameDetailUiEnt
 import com.example.kotlinconsecutivepractices.presentation.model.GameUiEntity
 
 class GamesUiMapper {
-    fun mapGame(gameEntity: GameEntity): GameUiEntity {
+    fun mapGameEntityToGameUiEntity(gameEntity: GameEntity): GameUiEntity {
         return GameUiEntity(
             gameEntity.id,
             gameEntity.name,
             gameEntity.released,
             gameEntity.backgroundImage,
             "%.2f".format(gameEntity.rating),
-            gameEntity.genres
+            gameEntity.genres,
+            gameEntity.isFavorite
+        )
+    }
+
+    fun mapGameUiEntityToGameEntity(gameUiEntity: GameUiEntity): GameEntity {
+        return GameEntity(
+            gameUiEntity.id,
+            gameUiEntity.name,
+            gameUiEntity.released,
+            gameUiEntity.backgroundImage,
+            gameUiEntity.rating.toFloat(),
+            gameUiEntity.genres,
+            gameUiEntity.isFavorite
         )
     }
 

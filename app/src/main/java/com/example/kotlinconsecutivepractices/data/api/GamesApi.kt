@@ -11,12 +11,15 @@ interface GamesApi {
     suspend fun getGames(
         @Query("page") page: Int = 1,
         @Query("page_size") pageSize: Int = 20,
-        @Query("key") key: String = ""
+        @Query("dates") dates: String = "",
+        @Query("search") search: String = "",
+        @Query("ordering") ordering: String = "-added",
+        @Query("key") key: String
     ): GamesListResponse
 
     @GET("games/{id}")
     suspend fun getGameDetailById(
         @Path("id") id: Int,
-        @Query("key") key: String = ""
+        @Query("key") key: String
     ): GameDetailResponse
 }
