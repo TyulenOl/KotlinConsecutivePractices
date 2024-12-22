@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.qualifier.named
 import org.koin.java.KoinJavaComponent.inject
+import java.time.LocalTime
 
 class ProfileRepository : IProfileRepository {
     private val dataStore: DataStore<ProfileEntity> by inject(
@@ -18,12 +19,13 @@ class ProfileRepository : IProfileRepository {
         return dataStore.data.firstOrNull()
     }
 
-    override suspend fun setProfile(photoUri: String, url: String, name: String): ProfileEntity {
+    override suspend fun setProfile(photoUri: String, url: String, name: String, time: LocalTime): ProfileEntity {
         return dataStore.updateData {
             it.toBuilder().apply {
                 this.photoUri = photoUri
                 this.url = url
                 this.name = name
+                this.time = time.toString()
             }.build()
         }
     }

@@ -9,18 +9,25 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.kotlinconsecutivepractices.presentation.navigation.AppBottomNavigationBar
 import com.example.kotlinconsecutivepractices.presentation.navigation.NavigationGraph
 import com.example.kotlinconsecutivepractices.presentation.utils.FiltersPinCache
+import com.example.kotlinconsecutivepractices.presentation.utils.NotificationChannelManager
 import com.example.kotlinconsecutivepractices.ui.theme.KotlinConsecutivePracticesTheme
 import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {
+    private val channelManager: NotificationChannelManager by lazy {
+        NotificationChannelManager(NotificationManagerCompat.from(this), this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
+        channelManager.createNotificationChannels()
         setContent {
             KotlinConsecutivePracticesTheme(dynamicColor = false) {
                 val navController = rememberNavController()

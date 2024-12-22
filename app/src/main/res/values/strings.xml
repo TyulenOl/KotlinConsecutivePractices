@@ -25,9 +25,15 @@
     <string name="profile_url">Ссылка на резюме</string>
     <string name="camera">Камера</string>
     <string name="gallery">Галерея</string>
+    <string name="timer">Время любимой пары</string>
 
     <string name="apply">Применить</string>
     <string name="retry">Повторить</string>
     <string name="save">Сохранить</string>
     <string name="resume">Резюме</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">OK</string>
+
+    <string name="notifications_channel">notifications_channel</string>
+    <string name="notifications_channel_name">Уведомление</string>
 </resources>

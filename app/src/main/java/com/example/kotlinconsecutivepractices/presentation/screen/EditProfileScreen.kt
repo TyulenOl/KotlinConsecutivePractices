@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -29,7 +30,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -51,9 +54,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import coil.compose.AsyncImage
 import com.example.kotlinconsecutivepractices.R
+import com.example.kotlinconsecutivepractices.presentation.components.TimePickerDialog
 import com.example.kotlinconsecutivepractices.presentation.viewModel.EditProfileViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import java.io.File
+import java.time.LocalTime
 import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,11 +77,11 @@ fun EditProfileScreen(onBackNavigation: () -> Unit) {
         }
 
     val requestPermissionLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission())
-        { isGranted: Boolean ->
-            if (!isGranted) {
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions())
+        { map: Map<String, Boolean> ->
+            if (map.values.contains(false)) {
                 val dialog = AlertDialog.Builder(context)
-                    .setMessage("Разрешение не получено")
+                    .setMessage("Ну, так не пойдет...")
                     .setCancelable(false)
                     .setPositiveButton("OK") { _, _ ->
                         onBackNavigation()
@@ -120,7 +125,7 @@ fun EditProfileScreen(onBackNavigation: () -> Unit) {
                         imageVector = Icons.Default.Check,
                         contentDescription = null,
                         modifier = Modifier
-                            .clickable { viewModel.saveParameters() }
+                            .clickable { viewModel.saveParameters(onBackNavigation) }
                             .padding(end = 5.dp)
                     )
                 }
@@ -157,21 +162,59 @@ fun EditProfileScreen(onBackNavigation: () -> Unit) {
                 label = { Text(stringResource(R.string.profile_url)) },
                 modifier = Modifier.fillMaxWidth()
             )
+            TextField(
+                value = uiState.timeString,
+                onValueChange = { viewModel.onTimeChanged(it) },
+                label = { Text(stringResource(R.string.timer)) },
+                isError = uiState.timeError != null,
+                trailingIcon = {
+                    Icon(
+                        painterResource(R.drawable.timer),
+                        contentDescription = null,
+                        modifier = Modifier.clickable { viewModel.onTimeInputClicked() }
+                    )
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            uiState.timeError?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.error,
+                )
+            }
+            if (uiState.showTimePicker) {
+                DialWithDialogExample(
+                    onConfirm = { h, m -> viewModel.onTimeConfirmed(h, m) },
+                    onDismiss = { viewModel.onTimeDialogDismiss() },
+                    time = uiState.time
+                )
+            }
         }
     }
 
     if (uiState.showPermission) {
         LaunchedEffect(Unit) {
-            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q &&
+            val permissions = mutableListOf<String>()
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
                 ContextCompat.checkSelfPermission(
                     context,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                requestPermissionLauncher.launch(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
+
+            if (
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+
+            requestPermissionLauncher.launch(permissions.toTypedArray())
         }
     }
 
@@ -214,5 +257,28 @@ fun EditProfileScreen(onBackNavigation: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DialWithDialogExample(
+    onConfirm: (Int, Int) -> Unit,
+    onDismiss: () -> Unit,
+    time: LocalTime
+) {
+    val timePickerState = rememberTimePickerState(
+        initialHour = time.hour,
+        initialMinute = time.minute,
+        is24Hour = true,
+    )
+
+    TimePickerDialog(
+        onDismiss = { onDismiss() },
+        onConfirm = { onConfirm(timePickerState.hour, timePickerState.minute) }
+    ) {
+        TimePicker(
+            state = timePickerState,
+        )
     }
 }

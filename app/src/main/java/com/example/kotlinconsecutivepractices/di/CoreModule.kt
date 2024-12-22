@@ -9,8 +9,6 @@ import com.example.kotlinconsecutivepractices.domain.model.ProfileEntity
 import com.example.kotlinconsecutivepractices.domain.repository.IGamesRepository
 import com.example.kotlinconsecutivepractices.domain.repository.IProfileRepository
 import com.example.kotlinconsecutivepractices.presentation.mappers.GamesUiMapper
-import com.example.kotlinconsecutivepractices.presentation.screen.EditProfileScreen
-import com.example.kotlinconsecutivepractices.presentation.screen.ProfileScreen
 import com.example.kotlinconsecutivepractices.presentation.utils.FiltersPinCache
 import com.example.kotlinconsecutivepractices.presentation.viewModel.EditProfileViewModel
 import com.example.kotlinconsecutivepractices.presentation.viewModel.FavoriteViewModel
@@ -34,5 +32,5 @@ val mainModule = module {
     viewModel { GameDetailViewModel(get(), get(), get()) }
     viewModel { FavoriteViewModel(get(), get()) }
     viewModel { ProfileViewModel(get()) }
-    viewModel { EditProfileViewModel(get()) }
+    viewModel { EditProfileViewModel(get(), get()) }
 }
